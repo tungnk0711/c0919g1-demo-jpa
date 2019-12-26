@@ -18,12 +18,23 @@ public class ProductRepositoryImpl implements IProductRepository {
 
     @Override
     public List<Product> findAll() {
-        TypedQuery<Product> query = em.createQuery("select p from Product p", Product.class);
-        return query.getResultList();
+
+        List<Product> products = em.createNamedQuery("findAllProduct").getResultList();
+        //TypedQuery<Product> query = em.createQuery("select p from Product p", Product.class);
+        //return query.getResultList();
+
+        return products;
     }
 
     @Override
     public void add(Product product) {
         em.persist(product);
+    }
+
+    @Override
+    public Product findById(Long id) {
+        Product product = (Product) em.createNamedQuery("findProductById")
+                .setParameter("proId",id).getSingleResult();
+        return product;
     }
 }

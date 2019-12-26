@@ -4,6 +4,10 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "products")
+@NamedQuery( name="findAllProduct",
+        query="select p from Product p")
+@NamedQuery( name="findProductById",
+        query="select p from Product p where p.id=:proId")
 public class Product {
 
     @Id
