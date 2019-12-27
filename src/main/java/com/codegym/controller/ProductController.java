@@ -31,7 +31,7 @@ public class ProductController {
     public ModelAndView addProduct() {
 
         //add Product to database
-        Product product = new Product("Samsung", 900d);
+        Product product = new Product("BlackBerry", 1000d);
         productService.add(product);
 
         ModelAndView modelAndView = new ModelAndView("/product/list");

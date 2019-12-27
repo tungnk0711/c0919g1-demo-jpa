@@ -8,6 +8,18 @@ import javax.persistence.*;
         query="select p from Product p")
 @NamedQuery( name="findProductById",
         query="select p from Product p where p.id=:proId")
+@NamedStoredProcedureQuery(
+        name = "getAllProductsStoredProcedure",
+        procedureName = "findAllProducts"
+)
+@NamedStoredProcedureQuery(
+        name = "addProductStoredProcedure",
+        procedureName = "addProduct",
+        parameters = {
+                @StoredProcedureParameter(name = "in_proname", mode = ParameterMode.IN, type = String.class),
+                @StoredProcedureParameter(name = "in_proprice", mode = ParameterMode.IN, type = Double.class),
+        }
+)
 public class Product {
 
     @Id
