@@ -3,7 +3,9 @@ package com.codegym;
 import com.codegym.repository.IProductRepository;
 import com.codegym.repository.impl.ProductRepositoryImpl;
 import com.codegym.service.IProductService;
+import com.codegym.service.IProductSpringDataService;
 import com.codegym.service.impl.ProductServiceImpl;
+import com.codegym.service.impl.ProductSpringDataServiceImpl;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
@@ -39,6 +41,7 @@ import java.util.Properties;
 @EnableTransactionManagement
 @EnableSpringDataWebSupport
 @ComponentScan("com.codegym.controller")
+@EnableJpaRepositories("com.codegym.repository")
 public class ApplicationConfig extends WebMvcConfigurerAdapter implements ApplicationContextAware {
 
     private ApplicationContext applicationContext;
@@ -48,14 +51,19 @@ public class ApplicationConfig extends WebMvcConfigurerAdapter implements Applic
         this.applicationContext = applicationContext;
     }
 
-    @Bean
+    /*@Bean
     IProductRepository productRepository(){
         return new ProductRepositoryImpl();
-    }
+    }*/
 
     @Bean
     IProductService productService(){
         return new ProductServiceImpl();
+    }
+
+    @Bean
+    IProductSpringDataService productSpringDataService(){
+        return new ProductSpringDataServiceImpl();
     }
 
     //Thymeleaf Configuration

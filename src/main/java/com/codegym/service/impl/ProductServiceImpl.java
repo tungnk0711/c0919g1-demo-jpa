@@ -9,22 +9,24 @@ import java.util.List;
 
 public class ProductServiceImpl implements IProductService {
 
-    @Autowired
-    IProductRepository productRepository;
+    /*@Autowired
+    IProductRepository productRepository;*/
 
     @Override
     public List<Product> findAll() {
-        return productRepository.findAll();
+        //return productRepository.findAll();
+        return null;
     }
 
     @Override
     public void add(Product product) {
-        productRepository.add(product);
+        //productRepository.add(product);
     }
 
     @Override
     public Product findById(Long id) {
-        Product product = productRepository.findById(id);
-        return product;
+        //Product product = productRepository.findById(id);
+        //return product;
+        return null;
     }
 }
