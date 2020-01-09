@@ -1,6 +1,9 @@
 package com.codegym.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "products")
@@ -26,6 +29,9 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @NotEmpty
+    @Size(min = 2, max = 30)
+    @Pattern(regexp="^[A-Za-z]*$", message = "Phai la ki chu")
     private String name;
     private Double price;
 
