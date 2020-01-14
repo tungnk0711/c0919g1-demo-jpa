@@ -1,5 +1,6 @@
 package com.codegym.controller;
 
+import com.codegym.model.MyCounter;
 import com.codegym.model.Product;
 import com.codegym.service.IProductService;
 import com.codegym.service.IProductSpringDataService;
@@ -9,8 +10,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import java.security.PublicKey;
 import java.util.List;
 
@@ -25,6 +28,8 @@ public class ProductController {
 
     @RequestMapping("/products")
     public ModelAndView getAllProduct() {
+
+
 
         long kq = productSpringDataService.countByName("Motorola");
 
@@ -61,7 +66,12 @@ public class ProductController {
     }
 
     @RequestMapping("/create")
-    public ModelAndView createForm() {
+    public ModelAndView createForm(HttpSession httpSession) {
+
+        MyCounter myCounter = (MyCounter) httpSession.getAttribute("mycounter");
+        int count = myCounter.getCount();
+
+
         ModelAndView modelAndView = new ModelAndView("/product/create");
         modelAndView.addObject("product", new Product());
         return modelAndView;

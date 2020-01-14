@@ -1,5 +1,6 @@
 package com.codegym.controller;
 
+import com.codegym.model.MyCounter;
 import com.codegym.model.PhoneNumber;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,13 +10,18 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @Controller
 public class PhoneController {
 
     @GetMapping("/create-phone")
-    public ModelAndView showForm() {
+    public ModelAndView showForm(HttpSession httpSession) {
+
+        String name = (String) httpSession.getAttribute("name");
+        int age = (int)httpSession.getAttribute("age");
+
 
         ModelAndView modelAndView = new ModelAndView("/phone/create");
         modelAndView.addObject("phonenumber", new PhoneNumber());
